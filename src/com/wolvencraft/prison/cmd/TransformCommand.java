@@ -104,12 +104,11 @@ public class TransformCommand implements BaseCommand {
 
 	@Override
 	public void getHelp() {
-		Message.formatHeader(20, "Transformations");
-		Message.formatHelp("expand", "<amount> [amount] [direction]", "Expands the selected region specified amount of blocks");
-		Message.formatHelp("contract", "<amount> [amount] [direction]", "Contracts the selected region specified amount of blocks");
+		Message.formatHeader(20, "Transformation");
+		Message.formatHelp("expand", "<amount> [amount] <direction>", "Expands the selected region specified amount of blocks");
+		Message.formatHelp("contract", "<amount> [amount] <direction>", "Contracts the selected region specified amount of blocks");
 		Message.send(" The second [amount] argument will be applied in the direction opposite of the one specified");
-		Message.formatHelp("shift", "<amount> [direction]", "Shifts the selected region specified amount of blocks");
-		Message.send(" If no direction is specified, your character's orientation will be used instead");
+		Message.formatHelp("shift", "<amount> <direction>", "Shifts the selected region specified amount of blocks");
 	}
 	
 	public void getHelpLine() { Message.formatHelp("transform", "", "Shows the selection transformation help page", "mcprison.select.commands"); }

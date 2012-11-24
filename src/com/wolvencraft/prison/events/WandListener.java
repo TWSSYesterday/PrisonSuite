@@ -31,7 +31,7 @@ public class WandListener implements Listener
 		ItemStack wand = new ItemStack(settings.WAND);
 		
 		if(!player.getItemInHand().equals(wand)
-			|| !player.hasPermission("prison.select.wand")
+			|| !player.hasPermission("prison.select")
 			|| (WorldEditHook.usingWorldEdit() && WorldEditHook.getWandItem() == settings.WAND)) return;
 		
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {

@@ -17,9 +17,9 @@ import com.wolvencraft.prison.util.Message;
  * @author bitWolfy
  */
 public enum CoreCommand implements CommandHook {
-	WAND (WandCommand.class, "prison.select.wand", false, "wand"),
-	SELECT (SelectCommand.class, "prison.select.commands", false, "hpos1", "hpos2", "pos1", "pos2"),
-	TRANSFORM (TransformCommand.class, "prison.select.commands", false, "expand", "contract", "shift"),
+	WAND (WandCommand.class, "prison.select", false, "wand"),
+	SELECT (SelectCommand.class, "prison.select", false, "hpos1", "hpos2", "pos1", "pos2"),
+	TRANSFORM (TransformCommand.class, "prison.select", false, "expand", "contract", "shift"),
 	HELP (HelpCommand.class, null, true, "help");
 	
 	/**
