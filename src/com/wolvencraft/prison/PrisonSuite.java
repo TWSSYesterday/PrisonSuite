@@ -16,6 +16,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.wolvencraft.prison.events.LoginListener;
 import com.wolvencraft.prison.events.WandListener;
 import com.wolvencraft.prison.hooks.PrisonPlugin;
+import com.wolvencraft.prison.hooks.TimedTask;
 import com.wolvencraft.prison.region.PrisonRegion;
 import com.wolvencraft.prison.region.PrisonSelection;
 import com.wolvencraft.prison.settings.Language;
@@ -29,6 +30,7 @@ public class PrisonSuite extends PrisonPlugin {
 	private static CommandManager commandManager;
 	
 	private static List<PrisonPlugin> plugins;
+	private static List<TimedTask> tasks;
 	private static List<PrisonSelection> selections;
 	
 	private static Settings settings;
@@ -51,6 +53,7 @@ public class PrisonSuite extends PrisonPlugin {
 		Message.debug("2. Checked for WorldEdit");
 		
 		plugins = new ArrayList<PrisonPlugin>();
+		tasks = new ArrayList<TimedTask>();
 		selections = new ArrayList<PrisonSelection>();
 		
 		plugins.add(this);
@@ -72,6 +75,15 @@ public class PrisonSuite extends PrisonPlugin {
 		Message.log("PrisonCore started");
 		
 		Message.debug("7. Starting up the timer...");
+		
+		long checkEvery = settings.TICKRATE;
+		Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for(TimedTask task : tasks) {
+					task.run();
+				}
+			}
+		}, 0L, checkEvery);
 	}
 	
 	public void onDisable() {
@@ -131,6 +143,11 @@ public class PrisonSuite extends PrisonPlugin {
 	public static PrisonSelection addSelection(PrisonSelection selection) {
 		selections.add(selection);
 		return selection;
+	}
+
+	public static void addTask(TimedTask task) {
+		tasks.add(task);
+		Message.log(task.getName() + " registered");
 	}
 	
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
