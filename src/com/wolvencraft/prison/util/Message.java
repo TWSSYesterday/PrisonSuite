@@ -12,12 +12,12 @@ import com.wolvencraft.prison.CommandManager;
 import com.wolvencraft.prison.PrisonSuite;
 
 public class Message {
-	public static Logger logger = Logger.getLogger("PrisonCore");
+	private static Logger logger = Logger.getLogger("PrisonSuite");
 	
 	public static void send(String message) {
 		CommandSender sender = CommandManager.getSender();
 		if(sender instanceof Player) send((Player) sender, message);
-		else log(message);
+		else Bukkit.getConsoleSender().sendMessage(message);
 	}
 	
 	public static void sendSuccess(Player player, String message) {
@@ -28,7 +28,7 @@ public class Message {
 	public static void sendSuccess(String message) {
 		CommandSender sender = CommandManager.getSender();
 		if(sender instanceof Player) sendSuccess((Player) sender, message);
-		else log(message);
+		else Bukkit.getConsoleSender().sendMessage(message);
 	}
 	
 	public static void sendError(Player player, String message) {
@@ -39,7 +39,7 @@ public class Message {
 	public static void sendError(String message) {
 		CommandSender sender = CommandManager.getSender();
 		if(sender instanceof Player) sendError((Player) sender, message);
-		else log(message);
+		else Bukkit.getConsoleSender().sendMessage(message);
 	}
 	
     /**
