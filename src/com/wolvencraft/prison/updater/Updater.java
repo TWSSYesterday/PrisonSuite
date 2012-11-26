@@ -24,6 +24,7 @@ public class Updater {
 		
 		needUpdating = new ArrayList<String>();
 		for(PrisonPlugin plugin : PrisonSuite.getPlugins()) {
+			if(data.get(plugin.getName()) == null) { continue; }
 			double newVersion = Double.parseDouble(data.get(plugin.getName()));
 			if(newVersion > plugin.getVersion()) needUpdating.add(plugin.getName());
 		}

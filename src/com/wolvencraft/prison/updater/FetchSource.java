@@ -42,6 +42,7 @@ public class FetchSource {
 					String[] parts = source.substring(1).split("=");
 					parts[1] = parts[1].substring(0, (parts[1].length() - 6));
 				    data.put(parts[0], parts[1]);
+				    Message.debug("Updater: " + parts[0] + " : " + parts[1]);
 				}
 			 }
 		}
