@@ -120,7 +120,7 @@ public class PrisonSuite extends PrisonPlugin {
 	public static PrisonSuite addPlugin(PrisonPlugin plugin) {
 		plugins.add(plugin);
 		Message.log(plugin.getName() + " registered");
-		return (PrisonSuite) Bukkit.getPluginManager().getPlugin("PrisonCore");
+		return (PrisonSuite) Bukkit.getPluginManager().getPlugin("PrisonSuite");
 	}
 	
 	public static boolean hasSelection(Player player) {
