@@ -1,7 +1,7 @@
 general:
   title: "[PrisonCore]"
   title-success: "&a[PrisonCore]"
-  title-error: "&4[PrisonCore]"
+  title-error: "&c[PrisonCore]"
 error:
   command: "Invalid command! Use &e/mine help for help."
   arguments: "Invalid parameters. Check your argument count!"

@@ -3,6 +3,7 @@ package com.wolvencraft.prison.events;
 //import org.bukkit.ChatColor;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,15 +29,16 @@ public class LoginListener implements Listener
 		Player player = event.getPlayer();
 		if(player.hasPermission("prison.admin")) {
 			if(!Updater.checkVersion()) {
-				Message.sendError(player, "Some of the PrisonSuite plugins are not up to date:");
+				String updateMessage = "PrisonSuite is not up to date (" + ChatColor.GREEN;
 				List<String> needUpdating = Updater.getOldPlugins();
-				String pluginString = needUpdating.get(0);
+				updateMessage += needUpdating.get(0);
 				if(needUpdating.size() > 1) {
 					for(int i = 1; i < needUpdating.size(); i++) {
-						pluginString = pluginString + ", " + needUpdating.get(i);
+						updateMessage = updateMessage + ChatColor.WHITE + ", " + ChatColor.GREEN + needUpdating.get(i);
 					}
 				}
-				player.sendMessage(pluginString);
+				updateMessage = updateMessage + ChatColor.WHITE + ")";
+				Message.sendError(player, updateMessage);
 			}
 		}
 		return;
