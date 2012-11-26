@@ -1,6 +1,6 @@
 name: PrisonSuite
 main: com.wolvencraft.prison.PrisonSuite
-version: 2.1.0
+version: 1.0
 description: Main dependency for all PrisonSuite plugins
 author: bitWolfy
 soft-depend: [WorldEdit]
