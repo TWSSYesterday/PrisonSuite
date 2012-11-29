@@ -14,42 +14,39 @@ import com.wolvencraft.prison.PrisonSuite;
 public class Message {
 	private static Logger logger = Logger.getLogger("PrisonSuite");
 	
-	public static void send(String message) {
-		CommandSender sender = CommandManager.getSender();
-		if(sender instanceof Player) send((Player) sender, message);
-		else Bukkit.getConsoleSender().sendMessage(message);
+	public static void send(CommandSender sender, String message) {
+		if(message == null) message = "";
+		sender.sendMessage(Util.parseColors(message));
 	}
 	
-	public static void sendSuccess(Player player, String message) {
-		message = PrisonSuite.getLanguage().GENERAL_SUCCESS + " " + ChatColor.WHITE + message;
-		send(player, message);
+	public static void send(String message) {
+		if(message == null) message = "";
+		send(CommandManager.getSender(), message);
+	}
+	
+	public static void sendSuccess(CommandSender sender, String message) {
+		if(message == null) message = "";
+		send(sender, PrisonSuite.getLanguage().GENERAL_SUCCESS + " " + ChatColor.WHITE + message);
 	}
 	
 	public static void sendSuccess(String message) {
-		CommandSender sender = CommandManager.getSender();
-		if(sender instanceof Player) sendSuccess((Player) sender, message);
-		else Bukkit.getConsoleSender().sendMessage(message);
+		if(message == null) message = "";
+		sendSuccess(CommandManager.getSender(), message);
 	}
 	
-	public static void sendError(Player player, String message) {
-		message = PrisonSuite.getLanguage().GENERAL_ERROR + " " + ChatColor.WHITE + message;
-		send(player, message);
+	public static void sendError(CommandSender sender, String message) {
+		if(message == null) message = "";
+		send(sender, PrisonSuite.getLanguage().GENERAL_ERROR + " " + ChatColor.WHITE + message);
 	}
 	
 	public static void sendError(String message) {
-		CommandSender sender = CommandManager.getSender();
-		if(sender instanceof Player) sendError((Player) sender, message);
-		else Bukkit.getConsoleSender().sendMessage(message);
+		if(message == null) message = "";
+		sendError(CommandManager.getSender(), message);
 	}
 	
-    /**
-     * Sends a message to the player
-     * @param player Recipient
-     * @param message Message to be sent
-     */
-	public static void send(Player player, String message) {
+	public static void sendCustom(String title, String message) {
 		if(message == null) message = "";
-		player.sendMessage(Util.parseColors(message));
+		send(CommandManager.getSender(), ChatColor.GOLD + "[" + title + "] " + ChatColor.WHITE + message);
 	}
 
     /**
