@@ -88,7 +88,8 @@ public class PrisonSuite extends PrisonPlugin {
 	}
 	
 	public void onDisable() {
-		
+		getServer().getScheduler().cancelTasks(this);
+		Message.log("PrisonSuite stopped");
 	}
 	
 	public void reloadLanguageData() {
@@ -124,10 +125,13 @@ public class PrisonSuite extends PrisonPlugin {
 		return (PrisonSuite) Bukkit.getPluginManager().getPlugin("PrisonSuite");
 	}
 	
+	public static PrisonPlugin getPlugin(String plugin) {
+		if(plugins.indexOf(plugin) == -1) return null;
+		else return plugins.get(plugins.indexOf(plugin));
+	}
+	
 	public static boolean hasSelection(Player player) {
-		for(PrisonSelection sel : selections) {
-			if(sel.getPlayer().equals(player)) return true;
-		}
+		for(PrisonSelection sel : selections) { if(sel.getPlayer().equals(player)) return true; }
 		return false;
 	}
 	
