@@ -1,10 +1,14 @@
 package com.wolvencraft.prison.hooks;
 
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import com.sk89q.worldedit.IncompleteRegionException;
+import com.sk89q.worldedit.LocalWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.bukkit.selections.Selection;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.Vector;
 import com.wolvencraft.prison.PrisonSuite;
 
 public class WorldEditHook {
@@ -19,25 +23,35 @@ public class WorldEditHook {
 	
 	public static Location[] getPoints(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Selection sel = we.getSelection(player);
+		Region sel = null;
+		try { sel = we.getSession(player).getSelection((LocalWorld) player.getWorld()); }
+		catch (IncompleteRegionException ire) { return null; }
 		Location[] loc = {null, null};
 		if(sel == null) return null;
-		loc[0] = sel.getMinimumPoint();
-		loc[1] = sel.getMaximumPoint();
+		loc[0] = toLocation((World) sel.getWorld(), sel.getMinimumPoint());
+		loc[1] = toLocation((World) sel.getWorld(), sel.getMaximumPoint());
 		return loc;
 	}
 	
 	public static Location getMaximumPoint(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Selection sel = we.getSelection(player);
+		Region sel = null;
+		try { sel = we.getSession(player).getSelection((LocalWorld) player.getWorld()); }
+		catch (IncompleteRegionException ire) { return null; }
 		if(sel == null) return null;
-		return sel.getMaximumPoint();
+		return toLocation((World) sel.getWorld(), sel.getMaximumPoint());
 	}
 	
 	public static Location getMinimumPoint(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Selection sel = we.getSelection(player);
+		Region sel = null;
+		try { sel = we.getSession(player).getSelection((LocalWorld) player.getWorld()); }
+		catch (IncompleteRegionException ire) { return null; }
 		if(sel == null) return null;
-		return sel.getMinimumPoint();
+		return toLocation((World) sel.getWorld(), sel.getMinimumPoint());
+	}
+	
+	private static Location toLocation(World world, Vector vector) {
+		return new Location(world, vector.getX(), vector.getY(), vector.getZ());
 	}
 }
