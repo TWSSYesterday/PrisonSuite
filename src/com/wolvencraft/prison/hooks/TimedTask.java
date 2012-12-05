@@ -6,10 +6,28 @@ package com.wolvencraft.prison.hooks;
  * @author bitDesctop
  *
  */
-public class TimedTask {
-	public TimedTask(long ticks) {}
+public interface TimedTask {
 	
-	public void run() {}
+	/**
+	 * Bulk of the task. All timed actions go here.
+	 */
+	public void run();
 	
-	public String getName() { return null; }
+	/**
+	 * Returns the name of the task for debug
+	 * @return Name of the task
+	 */
+	public String getName();
+	
+	/**
+	 * Checks if the task has expired
+	 * @return true if the task has expired, false otherwise.
+	 */
+	public boolean getExpired();
+	
+	/**
+	 * Cancels the current task.<br />
+	 * The task waits until the end of its period and then expires
+	 */
+	public void cancel();
 }
