@@ -6,11 +6,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.wolvencraft.prison.events.LoginListener;
@@ -27,6 +30,7 @@ public class PrisonSuite extends PrisonPlugin {
 	private double version = 1.0;
 	
 	private static WorldEditPlugin worldEditPlugin = null;
+	public static Economy economy = null;
 	
 	private static CommandManager commandManager;
 	
@@ -52,6 +56,13 @@ public class PrisonSuite extends PrisonPlugin {
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
 		Message.debug("2. Checked for WorldEdit");
+		
+		if (getServer().getPluginManager().getPlugin("Vault") != null) {
+			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+			if(rsp != null) {
+				economy = rsp.getProvider();
+			}
+        }
 		
 		plugins = new ArrayList<PrisonPlugin>();
 		tasks = new ArrayList<TimedTask>();
@@ -156,6 +167,7 @@ public class PrisonSuite extends PrisonPlugin {
 	}
 	
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
+	public static Economy getEconomy() 					{ return economy; }
 	public static Settings getSettings() 				{ return settings; }
 	public static Language getLanguage() 				{ return language; }
 	public static List<PrisonPlugin> getPlugins() 		{ return plugins; }

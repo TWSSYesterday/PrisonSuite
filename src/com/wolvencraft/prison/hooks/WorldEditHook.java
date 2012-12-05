@@ -12,15 +12,27 @@ import com.sk89q.worldedit.Vector;
 import com.wolvencraft.prison.PrisonSuite;
 
 public class WorldEditHook {
+	/**
+	 * Checks if WorldEdit exists and is running
+	 * @return true if WorldEdit is usable, false otherwise
+	 */
 	public static boolean usingWorldEdit() {
-		if(PrisonSuite.getWorldEditPlugin() == null) return false;
-		return true;
+		return (PrisonSuite.getWorldEditPlugin() != null && PrisonSuite.getWorldEditPlugin().isEnabled());
 	}
 	
+	/**
+	 * Returns the item ID of the wand item used by the WorldEdit
+	 * @return Item ID of the wand item
+	 */
 	public static int getWandItem() {
 		return PrisonSuite.getWorldEditPlugin().getLocalConfiguration().wandItem;
 	}
 	
+	/**
+	 * Returns both selection points as an array for the specified player
+	 * @param player Player who performed the selection
+	 * @return An array of selection points or null if there is no selection
+	 */
 	public static Location[] getPoints(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
@@ -33,6 +45,11 @@ public class WorldEditHook {
 		return loc;
 	}
 	
+	/**
+	 * Returns the maximum point of the selection
+	 * @param player Player who performed the selection
+	 * @return A selection point or null if there isn't one
+	 */
 	public static Location getMaximumPoint(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
@@ -41,7 +58,12 @@ public class WorldEditHook {
 		if(sel == null) return null;
 		return toLocation((World) sel.getWorld(), sel.getMaximumPoint());
 	}
-	
+
+	/**
+	 * Returns the minimum point of the selection
+	 * @param player Player who performed the selection
+	 * @return A selection point or null if there isn't one
+	 */
 	public static Location getMinimumPoint(Player player) {
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
