@@ -30,7 +30,7 @@ public class PrisonSuite extends PrisonPlugin {
 	private double version = 1.0;
 	
 	private static WorldEditPlugin worldEditPlugin = null;
-	public static Economy economy = null;
+	private static Economy economy = null;
 	
 	private static CommandManager commandManager;
 	
@@ -93,6 +93,7 @@ public class PrisonSuite extends PrisonPlugin {
 			public void run() {
 				for(TimedTask task : tasks) {
 					task.run();
+					if(task.getExpired()) tasks.remove(task);
 				}
 			}
 		}, 0L, checkEvery);
@@ -103,7 +104,7 @@ public class PrisonSuite extends PrisonPlugin {
 		Message.log("PrisonSuite stopped");
 	}
 	
-	public void reloadLanguageData() {
+	private void reloadLanguageData() {
 		String lang = PrisonSuite.getSettings().LANGUAGE;
 		if(lang == null) lang = "english";
 		lang = lang + ".yml";
@@ -124,7 +125,7 @@ public class PrisonSuite extends PrisonPlugin {
 		return languageData;
 	}
 
-	public void saveLanguageData() {
+	private void saveLanguageData() {
 		if (languageData == null || languageDataFile == null) return;
 		try { languageData.save(languageDataFile); }
 		catch (IOException ex) { Message.log("Could not save config to " + languageDataFile); }
