@@ -3,7 +3,7 @@ main: com.wolvencraft.prison.PrisonSuite
 version: 1.0
 description: Main dependency for all PrisonSuite plugins
 author: bitWolfy
-soft-depend: [WorldEdit]
+soft-depend: [WorldEdit, Vault]
 commands:
   prison:
     description: PrisonSuite help page
