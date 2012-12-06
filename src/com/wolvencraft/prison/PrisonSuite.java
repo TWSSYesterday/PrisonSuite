@@ -55,14 +55,15 @@ public class PrisonSuite extends PrisonPlugin {
 		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
-		Message.debug("2. Checked for WorldEdit");
 		
 		if (getServer().getPluginManager().getPlugin("Vault") != null) {
 			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
 			if(rsp != null) {
 				economy = rsp.getProvider();
+				Message.log("Vault found, using it for the economy");
 			}
         }
+		Message.debug("2. Checked for WorldEdit and Vault");
 		
 		plugins = new ArrayList<PrisonPlugin>();
 		tasks = new ArrayList<TimedTask>();
