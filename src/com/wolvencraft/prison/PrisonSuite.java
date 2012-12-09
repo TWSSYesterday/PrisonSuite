@@ -93,8 +93,10 @@ public class PrisonSuite extends PrisonPlugin {
 		Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				for(TimedTask task : tasks) {
-					task.run();
-					if(task.getExpired()) tasks.remove(task);
+					if(task.getExpired()) {
+						Message.debug("Task expired: " + task.getName());
+						tasks.remove(task);
+					} else { task.run(); }
 				}
 			}
 		}, 0L, checkEvery);
