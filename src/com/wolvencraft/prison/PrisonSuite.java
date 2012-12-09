@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
@@ -94,8 +95,13 @@ public class PrisonSuite extends PrisonPlugin {
 			public void run() {
 				for(TimedTask task : tasks) {
 					if(task.getExpired()) {
+						try {
 						Message.debug("Task expired: " + task.getName());
-						tasks.remove(task);
+						tasks.remove(task); }
+						catch(ConcurrentModificationException ex) {
+							Message.debug("ConcurrentModificationException thrown");
+							continue;
+						}
 					} else { task.run(); }
 				}
 			}
@@ -167,7 +173,7 @@ public class PrisonSuite extends PrisonPlugin {
 
 	public static void addTask(TimedTask task) {
 		tasks.add(task);
-		Message.log(task.getName() + " registered");
+		Message.debug("Task added: " + task.getName());
 	}
 	
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
