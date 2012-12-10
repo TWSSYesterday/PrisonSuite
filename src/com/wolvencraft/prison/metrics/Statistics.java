@@ -12,14 +12,16 @@ public class Statistics {
     private Metrics metrics;
      
     public Statistics(PrisonSuite plugin) {
-        try { this.metrics = new Metrics(plugin); }
-        catch (IOException e) { Message.log(Level.SEVERE, "Unable to start PluginMetrics"); }
+    	if(PrisonSuite.getSettings().METRICS) {
+	        try { this.metrics = new Metrics(plugin); }
+	        catch (IOException e) { Message.log(Level.SEVERE, "Unable to start PluginMetrics"); }
+    	}
     }
      
     public void gatherData() {
         if(metrics.isOptOut()) return;
          
-        Graph pluginsRunning = metrics.createGraph("# of PrisonSuite plugins running");
+        Graph pluginsRunning = metrics.createGraph("Number of PrisonSuite plugins running");
          
         pluginsRunning.addPlotter(new Metrics.Plotter("plugins") {
             @Override

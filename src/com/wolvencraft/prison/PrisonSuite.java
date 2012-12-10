@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
@@ -21,6 +20,7 @@ import com.wolvencraft.prison.events.LoginListener;
 import com.wolvencraft.prison.events.WandListener;
 import com.wolvencraft.prison.hooks.PrisonPlugin;
 import com.wolvencraft.prison.hooks.TimedTask;
+import com.wolvencraft.prison.metrics.Statistics;
 import com.wolvencraft.prison.region.PrisonRegion;
 import com.wolvencraft.prison.region.PrisonSelection;
 import com.wolvencraft.prison.settings.Language;
@@ -54,6 +54,10 @@ public class PrisonSuite extends PrisonPlugin {
 		language = new Language(this);
 		Message.debug("1. Loaded plugin configuration");
 		
+		Statistics stats = new Statistics(this);
+		stats.gatherData();
+		Message.debug("2. Attempted to start up PluginMetrics. It may be disabled by the configuration, though");
+		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
 		
@@ -64,7 +68,7 @@ public class PrisonSuite extends PrisonPlugin {
 				Message.log("Vault found, using it for the economy");
 			}
         }
-		Message.debug("2. Checked for WorldEdit and Vault");
+		Message.debug("3. Checked for WorldEdit and Vault");
 		
 		plugins = new ArrayList<PrisonPlugin>();
 		tasks = new ArrayList<TimedTask>();
@@ -72,36 +76,31 @@ public class PrisonSuite extends PrisonPlugin {
 		
 		plugins.add(this);
 		
-		Message.debug("3. Accepting plugins...");
+		Message.debug("4. Accepting plugins...");
 		
 		ConfigurationSerialization.registerClass(PrisonRegion.class, "PrisonRegion");
-		Message.debug("4. Registered serializable classes");
+		Message.debug("5. Registered serializable classes");
 
 		commandManager = new CommandManager(this);
 		getCommand("prison").setExecutor(commandManager);
 		getCommand("ps").setExecutor(commandManager);
-		Message.debug("5. Started up the CommandManager");
+		Message.debug("6. Started up the CommandManager");
 		
 		new LoginListener(this);
 		new WandListener(this);
-		Message.debug("6. Loaded event listeners");
+		Message.debug("7. Loaded event listeners");
 		
 		Message.log("PrisonCore started");
 		
-		Message.debug("7. Starting up the timer...");
+		Message.debug("8. Starting up the timer...");
 		
 		long checkEvery = settings.TICKRATE;
 		Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				for(TimedTask task : tasks) {
+				for(TimedTask task : getLocalTasks()) {
 					if(task.getExpired()) {
-						try {
 						Message.debug("Task expired: " + task.getName());
-						tasks.remove(task); }
-						catch(ConcurrentModificationException ex) {
-							Message.debug("ConcurrentModificationException thrown");
-							continue;
-						}
+						tasks.remove(task);
 					} else { task.run(); }
 				}
 			}
@@ -174,6 +173,12 @@ public class PrisonSuite extends PrisonPlugin {
 	public static void addTask(TimedTask task) {
 		tasks.add(task);
 		Message.debug("Task added: " + task.getName());
+	}
+	
+	public static List<TimedTask> getLocalTasks() {
+		List<TimedTask> temp = new ArrayList<TimedTask>();
+		for(TimedTask task : tasks) temp.add(task);
+		return temp;
 	}
 	
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
