@@ -73,6 +73,19 @@ public class PrisonRegion implements ConfigurationSerializable {
 		return blockCount;
 	}
 	
+	public int getBlockCountSolid() {
+		World world = minimum.getWorld();
+		int count = 0;
+		for(int x = minimum.getBlockX(); x < maximum.getBlockX(); x++) {
+			for(int y = minimum.getBlockY(); y < maximum.getBlockY(); y++) {
+				for(int z = minimum.getBlockZ(); z < maximum.getBlockZ(); z++) {
+					if(!world.getBlockAt(x, y, z).isEmpty()) count++;
+				}
+			}
+		}
+		return count;	
+	}
+	
 	public void setCoordinates(Location pos1, Location pos2) {
 		minimum = pos1.clone();
 		maximum = pos2.clone();
