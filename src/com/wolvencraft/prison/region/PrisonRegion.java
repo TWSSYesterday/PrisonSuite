@@ -10,6 +10,8 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.util.Vector;
 
+import com.wolvencraft.prison.util.Message;
+
 @SerializableAs("PrisonRegion")
 public class PrisonRegion implements ConfigurationSerializable {
 	private Location minimum, maximum;
@@ -74,14 +76,16 @@ public class PrisonRegion implements ConfigurationSerializable {
 	}
 	
 	public int getBlockCountSolid() {
+		Message.debug("Counting solid blocks. " + getBlockCount() + " blocks total.");
 		World world = minimum.getWorld();
 		int count = 0;
-		for(int x = minimum.getBlockX(); x < maximum.getBlockX(); x++) {
-			for(int y = minimum.getBlockY(); y < maximum.getBlockY(); y++) {
-				for(int z = minimum.getBlockZ(); z < maximum.getBlockZ(); z++) {
-					if(!world.getBlockAt(x, y, z).isEmpty()) count++;
+		for(int x = minimum.getBlockX(); x <= maximum.getBlockX(); x++) {
+			for(int y = minimum.getBlockY(); y <= maximum.getBlockY(); y++) {
+				for(int z = minimum.getBlockZ(); z <= maximum.getBlockZ(); z++) {
+					if(!world.getBlockAt(x, y, z).isEmpty()) { count++; }
 				}
 			}
+			Message.debug("count: " + count);
 		}
 		return count;	
 	}
@@ -101,13 +105,16 @@ public class PrisonRegion implements ConfigurationSerializable {
 	}
 	
 	public PrisonRegion clone() {
-		return new PrisonRegion(this.getMaximum(), this.getMaximum());
+		return new PrisonRegion(this.getMinimum(), this.getMaximum());
 	}
 	
 	public boolean isLocationInRegion(Location loc) {
+		Message.debug(minimum.getBlockX() + " <= " + loc.getBlockX() + " <= " + maximum.getBlockX() + " :: " + (loc.getBlockX() >= minimum.getBlockX() && loc.getBlockX() <= maximum.getBlockX()));
+		Message.debug(minimum.getBlockY() + " <= " + loc.getBlockY() + " <= " + maximum.getBlockY() + " :: " + (loc.getBlockY() >= minimum.getBlockY() && loc.getBlockY() <= maximum.getBlockY()));
+		Message.debug(minimum.getBlockZ() + " <= " + loc.getBlockZ() + " <= " + maximum.getBlockZ() + " :: " + (loc.getBlockZ() >= minimum.getBlockZ() && loc.getBlockZ() <= maximum.getBlockZ()));
 		return (loc.getWorld().equals(minimum.getWorld())
-        		&& (loc.getBlockX() >= minimum.getX() && loc.getBlockX() <= maximum.getX())
-                && (loc.getBlockY() >= minimum.getY() && loc.getBlockY() <= maximum.getY())
-                && (loc.getBlockZ() >= minimum.getZ() && loc.getBlockZ() <= maximum.getZ()));
+        		&& (loc.getBlockX() >= minimum.getBlockX() && loc.getBlockX() <= maximum.getBlockX())
+                && (loc.getBlockY() >= minimum.getBlockY() && loc.getBlockY() <= maximum.getBlockY())
+                && (loc.getBlockZ() >= minimum.getBlockZ() && loc.getBlockZ() <= maximum.getBlockZ()));
 	}
 }
