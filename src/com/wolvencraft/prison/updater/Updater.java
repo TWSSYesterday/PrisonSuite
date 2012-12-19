@@ -46,7 +46,7 @@ public class Updater {
 		
 		Message.log(" +------------------------------------------+");
 		Message.log(" |       PrisonSuite is not up to date!     |");
-		Message.log(" |          http://bit.ly/MineReset/        |");
+		Message.log(" |         http://bit.ly/PrisonSuite        |");
 		Message.log(" |                                          |");
 		Message.log(" |   Following plugins need to be updated:  |");
 		Message.log(" |                                          |");

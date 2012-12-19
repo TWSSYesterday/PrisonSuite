@@ -56,7 +56,7 @@ public class PrisonSuite extends PrisonPlugin {
 		
 		Statistics stats = new Statistics(this);
 		stats.gatherData();
-		Message.debug("2. Attempted to start up PluginMetrics. It may be disabled by the configuration, though");
+		Message.debug("2. Attempted to start up PluginMetrics.");
 		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
