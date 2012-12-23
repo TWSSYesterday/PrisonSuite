@@ -74,7 +74,7 @@ public class Message {
 	 * @param message Message to be sent
 	 */
 	public static void log(String message) {
-		logger.info("[PrisonCore] " + message);
+		logger.info("[PrisonSuite] " + message);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class Message {
 	 * @param message Message to be sent
 	 */
 	public static void log(Level level, String message) {
-		logger.log(level, "[PrisonCore] " + message);
+		logger.log(level, "[PrisonSuite] " + message);
 	}
 	
 	public static void formatHelp(String command, String arguments, String description, String node) {
