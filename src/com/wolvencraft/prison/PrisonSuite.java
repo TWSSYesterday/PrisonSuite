@@ -54,8 +54,7 @@ public class PrisonSuite extends PrisonPlugin {
 		language = new Language(this);
 		Message.debug("1. Loaded plugin configuration");
 		
-		Statistics stats = new Statistics(this);
-		stats.gatherData();
+		new Statistics(this);
 		Message.debug("2. Attempted to start up PluginMetrics.");
 		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");

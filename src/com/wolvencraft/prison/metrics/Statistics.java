@@ -15,6 +15,7 @@ public class Statistics {
     	if(PrisonSuite.getSettings().METRICS) {
 	        try {
 	        	this.metrics = new Metrics(plugin);
+	        	gatherData();
 	        	metrics.start();
 	        }
 	        catch (IOException e) { Message.log(Level.SEVERE, "Unable to start PluginMetrics"); }
