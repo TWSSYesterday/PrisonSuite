@@ -76,7 +76,6 @@ public class PrisonRegion implements ConfigurationSerializable {
 	}
 	
 	public int getBlockCountSolid() {
-		Message.debug("Counting solid blocks. " + getBlockCount() + " blocks total.");
 		World world = minimum.getWorld();
 		int count = 0;
 		for(int x = minimum.getBlockX(); x <= maximum.getBlockX(); x++) {
@@ -85,7 +84,6 @@ public class PrisonRegion implements ConfigurationSerializable {
 					if(!world.getBlockAt(x, y, z).isEmpty()) { count++; }
 				}
 			}
-			Message.debug("count: " + count);
 		}
 		return count;	
 	}
