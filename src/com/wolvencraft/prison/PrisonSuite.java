@@ -28,8 +28,6 @@ import com.wolvencraft.prison.settings.Settings;
 import com.wolvencraft.prison.util.Message;
 
 public class PrisonSuite extends PrisonPlugin {
-	private double version = 1.0;
-	
 	private static WorldEditPlugin worldEditPlugin = null;
 	private static Economy economy = null;
 	
@@ -184,5 +182,5 @@ public class PrisonSuite extends PrisonPlugin {
 	public static Settings getSettings() 				{ return settings; }
 	public static Language getLanguage() 				{ return language; }
 	public static List<PrisonPlugin> getPlugins() 		{ return plugins; }
-	public double getVersion()							{ return version; }
+	public double getVersion()							{ return Double.parseDouble(this.getDescription().getVersion()); }
 }
