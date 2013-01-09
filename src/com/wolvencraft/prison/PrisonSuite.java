@@ -91,7 +91,7 @@ public class PrisonSuite extends PrisonPlugin {
 		Message.debug("8. Starting up the timer...");
 		
 		long checkEvery = settings.TICKRATE;
-		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
+		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
 			public void run() {
 				for(TimedTask task : getLocalTasks()) {
 					if(task.getExpired()) {
