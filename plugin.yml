@@ -1,13 +1,12 @@
 name: PrisonSuite
 main: com.wolvencraft.prison.PrisonSuite
-version: 1.1
+version: 1.2
 description: Main dependency for all PrisonSuite plugins
+dev-url: http://dev.bukkit.org/server-mods/prisonsuite
 author: bitWolfy
 soft-depend: [WorldEdit, Vault]
 commands:
   prison:
-    description: PrisonSuite help page
-  ps:
     description: PrisonSuite help page
 permissions:
   prison.*:
