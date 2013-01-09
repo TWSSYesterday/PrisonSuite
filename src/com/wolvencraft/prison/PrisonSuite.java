@@ -82,7 +82,6 @@ public class PrisonSuite extends PrisonPlugin {
 
 		commandManager = new CommandManager(this);
 		getCommand("prison").setExecutor(commandManager);
-		getCommand("ps").setExecutor(commandManager);
 		Message.debug("6. Started up the CommandManager");
 		
 		new LoginListener(this);
