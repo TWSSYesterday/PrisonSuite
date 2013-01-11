@@ -22,7 +22,7 @@ public class CommandManager implements CommandExecutor
 		if(!(command.getName().equalsIgnoreCase("prison") || command.getName().equalsIgnoreCase("ps"))) return false;
 		
 		if(args.length == 0) {
-			CommandHandler.HELP.getHelp();
+			CommandHandler.HELP.run("");
 			CommandManager.sender = null;
 			return true;
 		}
