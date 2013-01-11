@@ -29,7 +29,7 @@ public class CommandManager implements CommandExecutor
 		for(CommandHandler cmd : CommandHandler.values()) {
 			if(cmd.isCommand(args[0])) {
 				
-				String argString = "/ps";
+				String argString = "/prison";
 		        for (String arg : args) { argString = argString + " " + arg; }
 				Message.debug(sender.getName() + ": " + argString);
 				
