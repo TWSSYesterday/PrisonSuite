@@ -1,6 +1,6 @@
 name: PrisonSuite
 main: com.wolvencraft.prison.PrisonSuite
-version: 1.2
+version: 1.3
 description: Main dependency for all PrisonSuite plugins
 dev-url: http://dev.bukkit.org/server-mods/prisonsuite
 author: bitWolfy
