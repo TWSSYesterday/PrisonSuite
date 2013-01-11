@@ -16,6 +16,14 @@ public class DebugCommand implements BaseCommand {
 				Message.send(task.getName());
 			}
 			return true;
+		} else if(args[0].equalsIgnoreCase("cancelTask")) {
+			for(TimedTask task : PrisonSuite.getLocalTasks()) {
+				if(task.getName().equalsIgnoreCase(args[1])) {
+					Message.send("Task " + task.getName() + " is being canceled");
+					task.cancel();
+				}
+			}
+			return true;
 		}
 		return false;
 	}
