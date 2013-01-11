@@ -21,7 +21,10 @@ public enum MaterialHook {
 	SNOW_BLOCK ("snow_block", "snowblock", "snow"),
 	SUGARCANE_BLOCK ("sugarcane_block", "sugarcaneblock", "sugarcane"),
 	PUMPKIN_BLOCK ("pumpkin_block", "pumpkinblock", "pumpkin"),
-	REDSTONE_ORE ("redstone_ore", "redstoneore", "redstone");
+	QUARTZ_ORE ("quartz_ore", "quartzore", "quartz"),
+	QUARTZ_BLOCK ("quartz_block", "quartzblock"),
+	REDSTONE_ORE ("redstone_ore", "redstoneore", "redstone"),
+	REDSTONE_BLOCK ("redstone_block", "redstoneblock");
 	
 	private List<String> alias;
 	
