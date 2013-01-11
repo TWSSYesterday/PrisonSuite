@@ -22,11 +22,11 @@ public class CommandManager implements CommandExecutor
 		if(!(command.getName().equalsIgnoreCase("prison") || command.getName().equalsIgnoreCase("ps"))) return false;
 		
 		if(args.length == 0) {
-			CoreCommand.HELP.getHelp();
+			CommandHandler.HELP.getHelp();
 			CommandManager.sender = null;
 			return true;
 		}
-		for(CoreCommand cmd : CoreCommand.values()) {
+		for(CommandHandler cmd : CommandHandler.values()) {
 			if(cmd.isCommand(args[0])) {
 				
 				String argString = "/ps";

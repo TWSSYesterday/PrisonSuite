@@ -16,11 +16,12 @@ import com.wolvencraft.prison.util.Message;
  * Wolfy <3 subcommands. They are kinky.
  * @author bitWolfy
  */
-public enum CoreCommand implements CommandHook {
-	WAND (WandCommand.class, "prison.select", false, "wand"),
+public enum CommandHandler implements CommandHook {
+	DEBUG (DebugCommand.class, "", false, "displayTasks"),
+	HELP (HelpCommand.class, null, true, "help"),
 	SELECT (SelectCommand.class, "prison.select", false, "hpos1", "hpos2", "pos1", "pos2"),
 	TRANSFORM (TransformCommand.class, "prison.select", false, "expand", "contract", "shift"),
-	HELP (HelpCommand.class, null, true, "help");
+	WAND (WandCommand.class, "prison.select", false, "wand");
 	
 	/**
 	 * A constructor that registers a command and all of its aliases
@@ -29,7 +30,7 @@ public enum CoreCommand implements CommandHook {
 	 * @param allowConsole Should the console be allowed to run this command
 	 * @param args Aliases for the command
 	 */
-	CoreCommand(Class<?> clazz, String permission, boolean allowConsole, String... args) {
+	CommandHandler(Class<?> clazz, String permission, boolean allowConsole, String... args) {
 		try {
 			this.clazz = (BaseCommand) clazz.newInstance();
 			this.permission = permission;
