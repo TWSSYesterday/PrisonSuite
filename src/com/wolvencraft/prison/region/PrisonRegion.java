@@ -81,7 +81,9 @@ public class PrisonRegion implements ConfigurationSerializable {
 		for(int x = minimum.getBlockX(); x <= maximum.getBlockX(); x++) {
 			for(int y = minimum.getBlockY(); y <= maximum.getBlockY(); y++) {
 				for(int z = minimum.getBlockZ(); z <= maximum.getBlockZ(); z++) {
-					if(!world.getBlockAt(x, y, z).isEmpty()) { count++; }
+					try { if(!world.getBlockAt(x, y, z).isEmpty()) { count++; } }
+					catch(Exception e) { continue; }
+					catch(Error er) { continue; }
 				}
 			}
 		}
