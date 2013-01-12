@@ -11,11 +11,6 @@ import com.wolvencraft.prison.cmd.*;
 import com.wolvencraft.prison.hooks.CommandHook;
 import com.wolvencraft.prison.util.Message;
 
-/**
- * bitWolfy's awkward way of registering all the subcommands.<br />
- * Wolfy <3 subcommands. They are kinky.
- * @author bitWolfy
- */
 public enum CommandHandler implements CommandHook {
 	DEBUG (DebugCommand.class, "", false, "displayTasks"),
 	HELP (HelpCommand.class, null, true, "help"),
@@ -23,13 +18,6 @@ public enum CommandHandler implements CommandHook {
 	TRANSFORM (TransformCommand.class, "prison.select", false, "expand", "contract", "shift"),
 	WAND (WandCommand.class, "prison.select", false, "wand");
 	
-	/**
-	 * A constructor that registers a command and all of its aliases
-	 * @param clazz A class file that has to implement BaseCommand
-	 * @param permission A permission needed to run the command or <i>null</i> if there isn't one
-	 * @param allowConsole Should the console be allowed to run this command
-	 * @param args Aliases for the command
-	 */
 	CommandHandler(Class<?> clazz, String permission, boolean allowConsole, String... args) {
 		try {
 			this.clazz = (BaseCommand) clazz.newInstance();
