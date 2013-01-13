@@ -52,9 +52,6 @@ public class PrisonSuite extends PrisonPlugin {
 		language = new Language(this);
 		Message.debug("1. Loaded plugin configuration");
 		
-		new Statistics(this);
-		Message.debug("2. Attempted to start up PluginMetrics.");
-		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
 		
@@ -65,7 +62,7 @@ public class PrisonSuite extends PrisonPlugin {
 				Message.log("Vault found, using it for the economy");
 			}
         }
-		Message.debug("3. Checked for WorldEdit and Vault");
+		Message.debug("2. Checked for WorldEdit and Vault");
 		
 		plugins = new ArrayList<PrisonPlugin>();
 		tasks = new ArrayList<TimedTask>();
@@ -73,20 +70,23 @@ public class PrisonSuite extends PrisonPlugin {
 		
 		plugins.add(this);
 		
-		Message.debug("4. Accepting plugins...");
+		Message.debug("3. Accepting plugins...");
 		
 		ConfigurationSerialization.registerClass(PrisonRegion.class, "PrisonRegion");
-		Message.debug("5. Registered serializable classes");
+		Message.debug("4. Registered serializable classes");
 
 		commandManager = new CommandManager(this);
 		getCommand("prison").setExecutor(commandManager);
-		Message.debug("6. Started up the CommandManager");
+		Message.debug("5. Started up the CommandManager");
 		
 		new LoginListener(this);
 		new WandListener(this);
-		Message.debug("7. Loaded event listeners");
+		Message.debug("6. Loaded event listeners");
 		
 		Message.log("PrisonCore started");
+		
+		new Statistics(this);
+		Message.debug("7. Attempted to start up PluginMetrics.");
 		
 		Message.debug("8. Starting up the timer...");
 		

@@ -15,8 +15,10 @@ public class Statistics {
     	if(PrisonSuite.getSettings().METRICS) {
 	        try {
 	        	this.metrics = new Metrics(plugin);
-	        	gatherData();
-	        	metrics.start();
+	        	if(!metrics.isOptOut()) {
+	        		gatherData();
+	        		metrics.start();
+	        	}
 	        }
 	        catch (IOException e) { Message.log(Level.SEVERE, "Unable to start PluginMetrics"); }
     	} else {
@@ -24,20 +26,15 @@ public class Statistics {
     	}
     }
      
-    public void gatherData() {
-    	Message.debug("Gathering data");
-        if(metrics.isOptOut() || !PrisonSuite.getSettings().METRICS) return;
-        
-        Message.debug("Op-out check passed");
+    private void gatherData() {
         Graph pluginsRunning = metrics.createGraph("Number of PrisonSuite plugins running");
-        Message.debug("New graph created");
+    	Message.debug("Sending data to Metrics. " + PrisonSuite.getPlugins().size() + " plugins");
         
-        pluginsRunning.addPlotter(new Metrics.Plotter("plugins") {
+        int plugins = PrisonSuite.getPlugins().size();
+        
+        pluginsRunning.addPlotter(new Metrics.Plotter(plugins + "") {
             @Override
-            public int getValue() {
-            	Message.debug("Sending data to Metrics. " + PrisonSuite.getPlugins().size() + " plugins");
-                return PrisonSuite.getPlugins().size();
-            }
+            public int getValue() { return 1; }
         });
     }
      
