@@ -1,4 +1,4 @@
-<project name="PrisonCore" default="build">
+<project name="PrisonSuite" default="build">
     <target name="build">
         <mkdir dir="build"/>
         <javac srcdir="src" destdir="build" debug="on">
@@ -13,7 +13,7 @@
                 <include name="*.yml"/>
             </fileset>
         </copy>
-        <jar jarfile="PrisonCore.jar" basedir="build"/>
+        <jar jarfile="PrisonSuite.jar" basedir="build"/>
         <delete dir="build"/>
     </target>
 </project>
