@@ -54,6 +54,7 @@ public class PrisonSuite extends PrisonPlugin {
 		
 		worldEditPlugin = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 		if(worldEditPlugin != null) Message.log("WorldEdit found, using it for region selection");
+		else Message.debug("No WorldEdit found");
 		
 		if (getServer().getPluginManager().getPlugin("Vault") != null) {
 			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
@@ -61,7 +62,7 @@ public class PrisonSuite extends PrisonPlugin {
 				economy = rsp.getProvider();
 				Message.log("Vault found, using it for the economy");
 			}
-        }
+        } else Message.debug("No Vault found");
 		Message.debug("2. Checked for WorldEdit and Vault");
 		
 		plugins = new ArrayList<PrisonPlugin>();
@@ -178,6 +179,9 @@ public class PrisonSuite extends PrisonPlugin {
 	}
 	
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
+	public static boolean usingWorldEdit() {
+		return (worldEditPlugin != null && worldEditPlugin.isEnabled());
+	}
 	public static Economy getEconomy() 					{ return economy; }
 	public static Settings getSettings() 				{ return settings; }
 	public static Language getLanguage() 				{ return language; }

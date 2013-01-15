@@ -13,10 +13,13 @@ import com.wolvencraft.prison.PrisonSuite;
 
 public class WorldEditHook {
 	/**
-	 * Checks if WorldEdit exists and is running
+	 * @deprecated
+	 * Checks if WorldEdit exists and is running.<br />
+	 * Moved to PrisonSuite main class for compatibility.
 	 * @return true if WorldEdit is usable, false otherwise
 	 */
 	public static boolean usingWorldEdit() {
+		if(PrisonSuite.getWorldEditPlugin() == null) com.wolvencraft.prison.util.Message.debug("No WE found, told you already!");
 		return (PrisonSuite.getWorldEditPlugin() != null && PrisonSuite.getWorldEditPlugin().isEnabled());
 	}
 	
@@ -34,6 +37,7 @@ public class WorldEditHook {
 	 * @return An array of selection points or null if there is no selection
 	 */
 	public static Location[] getPoints(Player player) {
+		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
 		LocalSession session = we.getSession(player);
@@ -52,6 +56,7 @@ public class WorldEditHook {
 	 * @return A selection point or null if there isn't one
 	 */
 	public static Location getMaximumPoint(Player player) {
+		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
 		LocalSession session = we.getSession(player);
@@ -67,6 +72,7 @@ public class WorldEditHook {
 	 * @return A selection point or null if there isn't one
 	 */
 	public static Location getMinimumPoint(Player player) {
+		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
 		Region sel = null;
 		LocalSession session = we.getSession(player);

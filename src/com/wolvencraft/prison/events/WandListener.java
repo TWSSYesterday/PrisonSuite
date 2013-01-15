@@ -14,10 +14,8 @@ import com.wolvencraft.prison.region.PrisonSelection;
 import com.wolvencraft.prison.settings.Settings;
 import com.wolvencraft.prison.util.Message;
 
-public class WandListener implements Listener
-{
-	public WandListener(PrisonSuite plugin)
-	{
+public class WandListener implements Listener {
+	public WandListener(PrisonSuite plugin) {
         Message.debug("Initiating PlayerInteractListener");
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -32,7 +30,8 @@ public class WandListener implements Listener
 		
 		if(!player.getItemInHand().equals(wand)
 			|| !player.hasPermission("prison.select")
-			|| (WorldEditHook.usingWorldEdit() && WorldEditHook.getWandItem() == settings.WAND)) return;
+			|| (PrisonSuite.usingWorldEdit() && WorldEditHook.getWandItem() == settings.WAND)
+		) return;
 		
 		if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			Location loc = event.getClickedBlock().getLocation();
