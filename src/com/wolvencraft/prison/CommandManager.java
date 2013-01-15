@@ -14,8 +14,8 @@ import com.wolvencraft.prison.util.Message;
 public enum CommandManager implements CommandHook {
 	DEBUG (DebugCommand.class, "", false, "displayTasks"),
 	HELP (HelpCommand.class, null, true, "help"),
-	SELECT (SelectCommand.class, "prison.select", false, "hpos1", "hpos2", "pos1", "pos2"),
-	TRANSFORM (TransformCommand.class, "prison.select", false, "expand", "contract", "shift"),
+	SELECT (SelectCommand.class, "prison.select", false, "select", "hpos1", "hpos2", "pos1", "pos2"),
+	TRANSFORM (TransformCommand.class, "prison.select", false, "transform", "expand", "contract", "shift"),
 	WAND (WandCommand.class, "prison.select", false, "wand");
 	
 	CommandManager(Class<?> clazz, String permission, boolean allowConsole, String... args) {

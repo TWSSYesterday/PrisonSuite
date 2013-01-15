@@ -28,8 +28,10 @@ public class TransformCommand implements BaseCommand {
 		}
 		
 		PrisonSelection sel = PrisonSuite.getSelection(player);
-		
-		if(args[0].equalsIgnoreCase("expand")) {
+		if(args[0].equalsIgnoreCase("transform")) {
+			getHelp();
+			return true;
+		} else if(args[0].equalsIgnoreCase("expand")) {
 			if(args.length == 3) {
 				try {
 					BlockFace direction = BlockFace.valueOf(args[2].toUpperCase());
@@ -111,5 +113,5 @@ public class TransformCommand implements BaseCommand {
 		Message.formatHelp("shift", "<amount> <direction>", "Shifts the selected region specified amount of blocks");
 	}
 	
-	public void getHelpLine() { Message.formatHelp("transform", "", "Shows the selection transformation help page", "mcprison.select.commands"); }
+	public void getHelpLine() { Message.formatHelp("transform", "", "Shows the selection transformation help page", "prison.select.commands"); }
 }

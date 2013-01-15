@@ -67,5 +67,5 @@ public class SelectCommand  implements BaseCommand {
         return;
     }
 	
-	public void getHelpLine() { Message.formatHelp("select", "", "Shows the region selection help page", "mcprison.select.commands"); }
+	public void getHelpLine() { Message.formatHelp("select", "", "Shows the region selection help page", "prison.select.commands"); }
 }
