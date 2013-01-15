@@ -11,20 +11,20 @@ import com.wolvencraft.prison.util.Util;
 
 public class PrisonSelection {
 	private Location pos1, pos2;
-	private Player player;
+	private String playerName;
 	private Timestamp timestamp;
 	
 	public PrisonSelection(Player player) {
 		Message.debug("Creating a new PrisonSelection for " + player.getDisplayName());
 		pos1 = null;
 		pos2 = null;
-		this.player = player;
+		playerName = player.getPlayerListName();
 		timestamp = Util.getCurrentTime();
 	}
 	
 	public Location getPos1() { return pos1; }
 	public Location getPos2() { return pos2; }
-	public Player getPlayer() { return player; }
+	public String getPlayerName() { return playerName; }
 	public Timestamp getTimestamp() { return timestamp; }
 	
 	public int getBlockCount() {

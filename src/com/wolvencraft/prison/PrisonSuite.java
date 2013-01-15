@@ -148,7 +148,7 @@ public class PrisonSuite extends PrisonPlugin {
 	}
 	
 	public static boolean hasSelection(Player player) {
-		for(PrisonSelection sel : selections) { if(sel.getPlayer().equals(player)) return true; }
+		for(PrisonSelection sel : selections) { if(sel.getPlayerName().equals(player.getPlayerListName())) return true; }
 		return false;
 	}
 	
@@ -156,7 +156,7 @@ public class PrisonSuite extends PrisonPlugin {
 		PrisonSelection selection = null;
 		Message.debug(selections.size() + " selections found");
 		for(PrisonSelection sel : selections) {
-			if(sel.getPlayer().getName().equals(player.getName())) selection = sel;
+			if(sel.getPlayerName().equals(player.getPlayerListName())) selection = sel;
 		}
 		if(selection == null) selection = addSelection(new PrisonSelection(player));
 		return selection;
