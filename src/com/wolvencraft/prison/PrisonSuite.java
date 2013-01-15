@@ -9,6 +9,8 @@ import java.util.List;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -28,10 +30,10 @@ import com.wolvencraft.prison.settings.Settings;
 import com.wolvencraft.prison.util.Message;
 
 public class PrisonSuite extends PrisonPlugin {
+	private static PrisonSuite plugin;
+	
 	private static WorldEditPlugin worldEditPlugin = null;
 	private static Economy economy = null;
-	
-	private static CommandManager commandManager;
 	
 	private static List<PrisonPlugin> plugins;
 	private static List<TimedTask> tasks;
@@ -43,6 +45,8 @@ public class PrisonSuite extends PrisonPlugin {
 	private static Language language;
 	
 	public void onEnable() {
+		plugin = this;
+		
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 		settings = new Settings(this);
@@ -76,8 +80,6 @@ public class PrisonSuite extends PrisonPlugin {
 		ConfigurationSerialization.registerClass(PrisonRegion.class, "PrisonRegion");
 		Message.debug("4. Registered serializable classes");
 
-		commandManager = new CommandManager(this);
-		getCommand("prison").setExecutor(commandManager);
 		Message.debug("5. Started up the CommandManager");
 		
 		new LoginListener(this);
@@ -102,6 +104,34 @@ public class PrisonSuite extends PrisonPlugin {
 				}
 			}
 		}, 0L, checkEvery);
+	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		CommandManager.setSender(sender);
+		if(!(command.getName().equalsIgnoreCase("prison"))) return false;
+		
+		if(args.length == 0) {
+			CommandManager.HELP.run("");
+			CommandManager.resetSender();
+			return true;
+		}
+		for(CommandManager cmd : CommandManager.values()) {
+			if(cmd.isCommand(args[0])) {
+				
+				String argString = "/prison";
+		        for (String arg : args) { argString = argString + " " + arg; }
+				Message.debug(sender.getName() + ": " + argString);
+				
+				boolean result = cmd.run(args);
+				CommandManager.resetSender();
+				return result;
+			}
+		}
+		
+		Message.sendError(PrisonSuite.getLanguage().ERROR_COMMAND);
+		CommandManager.resetSender();
+		return false;
 	}
 	
 	public void onDisable() {
@@ -178,6 +208,7 @@ public class PrisonSuite extends PrisonPlugin {
 		return temp;
 	}
 	
+	public static PrisonSuite getInstance()				{ return plugin; }
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
 	public static boolean usingWorldEdit() {
 		return (worldEditPlugin != null && worldEditPlugin.isEnabled());
