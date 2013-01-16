@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -198,6 +199,12 @@ public class PrisonSuite extends PrisonPlugin {
 	}
 
 	public static void addTask(TimedTask task) {
+		for(TimedTask testTask : tasks) {
+			if(testTask.getName().equalsIgnoreCase(task.getName())) {
+				Message.log(Level.WARNING, "Attempted to add a duplicate task");
+				return;
+			}
+		}
 		tasks.add(task);
 		Message.debug("Task added: " + task.getName());
 	}
@@ -210,9 +217,7 @@ public class PrisonSuite extends PrisonPlugin {
 	
 	public static PrisonSuite getInstance()				{ return plugin; }
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
-	public static boolean usingWorldEdit() {
-		return (worldEditPlugin != null && worldEditPlugin.isEnabled());
-	}
+	public static boolean usingWorldEdit() 				{ return (worldEditPlugin != null && worldEditPlugin.isEnabled()); }
 	public static Economy getEconomy() 					{ return economy; }
 	public static Settings getSettings() 				{ return settings; }
 	public static Language getLanguage() 				{ return language; }
