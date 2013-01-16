@@ -66,7 +66,7 @@ public class Message {
      * @param message Message to be sent
      */
     public static void debug(String message) {
-        if (PrisonSuite.getSettings().DEBUG) logger.log(Level.INFO, "[PrisonDebug]" + message);
+        if (PrisonSuite.getSettings().DEBUG) logger.log(Level.INFO, "[PrisonDebug] " + message);
     }
     
     /**
@@ -75,7 +75,7 @@ public class Message {
      * @param message Message to be sent
      */
     public static void debug(Level level, String message) {
-        if (PrisonSuite.getSettings().DEBUG) logger.log(level, "[PrisonDebug]" + message);
+        if (PrisonSuite.getSettings().DEBUG) logger.log(level, "[PrisonDebug] " + message);
     }
 	
 	/**
