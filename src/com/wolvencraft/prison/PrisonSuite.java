@@ -201,7 +201,7 @@ public class PrisonSuite extends PrisonPlugin {
 	public static void addTask(TimedTask task) {
 		for(TimedTask testTask : tasks) {
 			if(testTask.getName().equalsIgnoreCase(task.getName())) {
-				Message.log(Level.WARNING, "Attempted to add a duplicate task");
+				Message.debug(Level.WARNING, "Attempted to add a duplicate task");
 				return;
 			}
 		}
