@@ -10,8 +10,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.util.Vector;
 
-import com.wolvencraft.prison.util.Message;
-
 @SerializableAs("PrisonRegion")
 public class PrisonRegion implements ConfigurationSerializable {
 	private Location minimum, maximum;
@@ -109,9 +107,6 @@ public class PrisonRegion implements ConfigurationSerializable {
 	}
 	
 	public boolean isLocationInRegion(Location loc) {
-		Message.debug(minimum.getBlockX() + " <= " + loc.getBlockX() + " <= " + maximum.getBlockX() + " :: " + (loc.getBlockX() >= minimum.getBlockX() && loc.getBlockX() <= maximum.getBlockX()));
-		Message.debug(minimum.getBlockY() + " <= " + loc.getBlockY() + " <= " + maximum.getBlockY() + " :: " + (loc.getBlockY() >= minimum.getBlockY() && loc.getBlockY() <= maximum.getBlockY()));
-		Message.debug(minimum.getBlockZ() + " <= " + loc.getBlockZ() + " <= " + maximum.getBlockZ() + " :: " + (loc.getBlockZ() >= minimum.getBlockZ() && loc.getBlockZ() <= maximum.getBlockZ()));
 		return (loc.getWorld().equals(minimum.getWorld())
         		&& (loc.getBlockX() >= minimum.getBlockX() && loc.getBlockX() <= maximum.getBlockX())
                 && (loc.getBlockY() >= minimum.getBlockY() && loc.getBlockY() <= maximum.getBlockY())
