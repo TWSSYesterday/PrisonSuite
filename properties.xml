@@ -2,5 +2,5 @@
 	<name>PrisonSuite</name>
 	<version>1.4</version>
 	<craftbukkit>CB 1.4.7-R0.1</craftbukkit>
-	<type>Development Build</type>
+	<type>Recommended Build</type>
 </plugin>
