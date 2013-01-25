@@ -30,5 +30,5 @@ public class WandCommand  implements BaseCommand {
 	
 	public void getHelp() {}
 	
-	public void getHelpLine() { Message.formatHelp("wand", "", "Gives you a PrisonSuite selection wand", "prison.mine.wand"); }
+	public void getHelpLine() { Message.formatHelp("wand", "", "Gives you a PrisonSuite selection wand", "prison.select"); }
 }
