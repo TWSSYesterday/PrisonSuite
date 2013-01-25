@@ -16,7 +16,7 @@ public class Message {
 	
 	public static void send(CommandSender sender, String message) {
 		if(message == null) message = "";
-		sender.sendMessage(Util.parseColors(message));
+		sender.sendMessage(Util.parseChatColors(message));
 	}
 	
 	public static void send(String message) {
@@ -57,7 +57,7 @@ public class Message {
         if(message == null) message = "";
 		message = PrisonSuite.getLanguage().GENERAL_SUCCESS + " " + ChatColor.WHITE + message;
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-        	p.sendMessage(Util.parseColors(message));
+        	p.sendMessage(Util.parseChatColors(message));
         }
     }
 	
