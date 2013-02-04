@@ -1,14 +1,10 @@
 package com.wolvencraft.prison.hooks;
 
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import com.sk89q.worldedit.IncompleteRegionException;
-import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.selections.Selection;
 import com.wolvencraft.prison.PrisonSuite;
 
 public class WorldEditHook {
@@ -39,14 +35,11 @@ public class WorldEditHook {
 	public static Location[] getPoints(Player player) {
 		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Region sel = null;
-		LocalSession session = we.getSession(player);
-		try { sel = session.getSelection(session.getSelectionWorld()); }
-		catch (IncompleteRegionException ire) { return null; }
+		Selection sel = we.getSelection(player);
 		Location[] loc = {null, null};
 		if(sel == null) return null;
-		loc[0] = toLocation(player.getWorld(), sel.getMinimumPoint());
-		loc[1] = toLocation(player.getWorld(), sel.getMaximumPoint());
+		loc[0] = sel.getMinimumPoint();
+		loc[1] = sel.getMaximumPoint();
 		return loc;
 	}
 	
@@ -58,12 +51,9 @@ public class WorldEditHook {
 	public static Location getMaximumPoint(Player player) {
 		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Region sel = null;
-		LocalSession session = we.getSession(player);
-		try { sel = session.getSelection(session.getSelectionWorld()); }
-		catch (IncompleteRegionException ire) { return null; }
+		Selection sel = we.getSelection(player);
 		if(sel == null) return null;
-		return toLocation(player.getWorld(), sel.getMaximumPoint());
+		return sel.getMaximumPoint();
 	}
 
 	/**
@@ -74,15 +64,8 @@ public class WorldEditHook {
 	public static Location getMinimumPoint(Player player) {
 		if(!usingWorldEdit()) return null;
 		WorldEditPlugin we = PrisonSuite.getWorldEditPlugin();
-		Region sel = null;
-		LocalSession session = we.getSession(player);
-		try { sel = session.getSelection(session.getSelectionWorld()); }
-		catch (IncompleteRegionException ire) { return null; }
+		Selection sel = we.getSelection(player);
 		if(sel == null) return null;
-		return toLocation(player.getWorld(), sel.getMinimumPoint());
-	}
-	
-	private static Location toLocation(World world, Vector vector) {
-		return new Location(world, vector.getX(), vector.getY(), vector.getZ());
+		return sel.getMinimumPoint();
 	}
 }
