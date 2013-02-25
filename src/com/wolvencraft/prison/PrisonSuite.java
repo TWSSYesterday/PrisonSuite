@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -35,6 +36,7 @@ public class PrisonSuite extends PrisonPlugin {
 	
 	private static WorldEditPlugin worldEditPlugin = null;
 	private static Economy economy = null;
+	private static Permission permission = null;
 	
 	private static List<PrisonPlugin> plugins;
 	private static List<TimedTask> tasks;
@@ -62,10 +64,16 @@ public class PrisonSuite extends PrisonPlugin {
 		else Message.debug("No WorldEdit found");
 		
 		if (getServer().getPluginManager().getPlugin("Vault") != null) {
-			RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-			if(rsp != null) {
-				economy = rsp.getProvider();
-				Message.log("Vault found, using it for the economy");
+			RegisteredServiceProvider<Economy> rspEcon = getServer().getServicesManager().getRegistration(Economy.class);
+			if(rspEcon != null) {
+				economy = rspEcon.getProvider();
+				Message.log("Vault found: Economy hook enabled");
+			}
+			
+			RegisteredServiceProvider<Permission> rspPerm = getServer().getServicesManager().getRegistration(Permission.class);
+			if(rspPerm != null) {
+				permission = rspPerm.getProvider();
+				Message.log("Vault found: Permissions hook enabled");
 			}
         } else Message.debug("No Vault found");
 		Message.debug("2. Checked for WorldEdit and Vault");
@@ -219,6 +227,7 @@ public class PrisonSuite extends PrisonPlugin {
 	public static WorldEditPlugin getWorldEditPlugin() 	{ return worldEditPlugin; }
 	public static boolean usingWorldEdit() 				{ return (worldEditPlugin != null && worldEditPlugin.isEnabled()); }
 	public static Economy getEconomy() 					{ return economy; }
+	public static Permission getPermissions()			{ return permission; }
 	public static Settings getSettings() 				{ return settings; }
 	public static Language getLanguage() 				{ return language; }
 	public static List<PrisonPlugin> getPlugins() 		{ return plugins; }
