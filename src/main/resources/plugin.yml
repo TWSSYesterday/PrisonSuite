@@ -1,0 +1,27 @@
+name: PrisonSuite
+main: com.wolvencraft.prison.PrisonSuite
+version: 1.4
+description: Main dependency for all PrisonSuite plugins
+dev-url: http://dev.bukkit.org/server-mods/prisonsuite
+author: bitWolfy
+soft-depend: [WorldEdit, Vault]
+commands:
+  prison:
+    description: PrisonSuite help page
+permissions:
+  prison.*:
+    default: op
+    children:
+      prison.admin: true
+  prison.select:
+    default: op
+    children:
+      prison.select.wand: true
+      prison.select.commands: true
+  prison.admin:
+    default: op
+    children:
+      prison.select: true
+      prison.mine.*: true
+      prison.cells.*: true
+      prison.regions.*: true
